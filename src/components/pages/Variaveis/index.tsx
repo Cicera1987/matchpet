@@ -7,22 +7,15 @@ import TemplateMatch from "../../template/Match/templateMatch";
 import { Container, ContainerButton, ContainerValor, ContainerVariaveis, TitleVariaveis } from "./styles";
 
 const Variaveis = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [isOpenOne, setIsOpenOne] = useState(false)
+    const [isOpenInsert, setIsOpenInsert] = useState(false)
+    const [isOpenRemove, setIsOpenRemove] = useState(false)
 
-    const openModal = () => {
-        setIsOpen(true);
+    const openModalInsert = () => {
+        setIsOpenInsert((prev) => !prev);
     };
 
-    const closeModal = () => {
-        setIsOpen(false);
-    };
-    const openModalOne = () => {
-        setIsOpenOne(true);
-    };
-
-    const closeModalOne = () => {
-        setIsOpenOne(false);
+    const openModalRemove = () => {
+        setIsOpenRemove((prev) => !prev);
     };
 
 
@@ -39,8 +32,8 @@ const Variaveis = () => {
                         <TitleVariaveis> Valor </TitleVariaveis>
                     </ContainerValor>
                     <ContainerButton>
-                        <ReusableButton color="#90D74A" title="Criar Variavel" onClick={openModal} />
-                        <ReusableButton color="#E91C1C" title="Remover Variável" onClick={openModalOne} />
+                        <ReusableButton color="#90D74A" title="Criar Variavel" onClick={openModalInsert} />
+                        <ReusableButton color="#E91C1C" title="Remover Variável" onClick={openModalRemove} />
                         <ReusableButton color="#90D74A" title="Criar Valor" onClick={() => { }} />
                         <ReusableButton color="#E91C1C" title="Remover Valor" onClick={() => { }} />
                     </ContainerButton>
@@ -48,8 +41,8 @@ const Variaveis = () => {
 
             </TemplateMatch>
             RemoveVariable
-            {isOpen && <InsertVariable isOpen={isOpen} closeModal={closeModal} />}
-            {isOpenOne && <RemoveVariable isOpenOne={isOpenOne} closeModalOne={closeModalOne} />}
+            {isOpenInsert && <InsertVariable isOpenInsert={isOpenInsert} openModalInsert={openModalInsert} />}
+            {isOpenRemove && <RemoveVariable isOpenRemove={isOpenRemove} openModalRemove={openModalRemove} />}
 
         </>
     )

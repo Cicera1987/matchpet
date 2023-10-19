@@ -3,15 +3,15 @@ import { Container, ContainerButton, ContainerFixed, ContainerModal, InputVariab
 import { FiXCircle } from "react-icons/fi";
 
 interface InsertVariableProps {
-    isOpenOne: boolean;
-    closeModalOne: () => void;
+    isOpenRemove: boolean;
+    openModalRemove: () => void;
 }
 
-export const RemoveVariable = ({ isOpenOne, closeModalOne }: InsertVariableProps) => {
+export const RemoveVariable = ({ isOpenRemove, openModalRemove }: InsertVariableProps) => {
     return (
         <ContainerModal>
             <Container>
-                <FiXCircle size={30} onClick={closeModalOne} />
+                <FiXCircle size={30} onClick={openModalRemove} />
                 <ContainerFixed>
 
                     <ContainerInputs>
