@@ -1,13 +1,6 @@
-import { FaTimes } from "react-icons/fa";
-import Home from "../../pages/Home";
 import SidebarItem from "../SidebarItem";
 import { Container, Content, Title } from "./styles";
 import { useNavigate } from 'react-router-dom';
-
-interface SidebarProps {
-    active: (isActive: boolean) => void;
-    onClose?: () => void;
-}
 
 const Sidebar = () => {
 
@@ -16,7 +9,7 @@ const Sidebar = () => {
     return (
         <Container >
       
-            <Title>MatchPat</Title>
+            <Title>MatchPet</Title>
             <Content>
                 <div onClick={() => navigate("/regras")}>{<SidebarItem title="Regra" />}</div>
                 <div onClick={() => navigate("/variaveis")}>{<SidebarItem title="Variaveis" />}</div>
