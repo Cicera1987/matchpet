@@ -33,8 +33,6 @@ export const Container = styled.div`
     color: #D9D9D9;
   }
 `;
-
-
 export const ContainerFixed = styled.div`
     width: 95%;
     height: 90%;
@@ -102,5 +100,17 @@ export const ContainerTitle = styled.div`
     text-align: center;
     font-size: 25px;
     font-weight: 700;
+`
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow: auto;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 5;
 `
 

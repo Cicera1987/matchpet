@@ -1,6 +1,7 @@
 import ButtonModal from "../../../atoms/Buttons/ButtonModal";
 import { Container, ContainerButton, ContainerFixed, ContainerModal, InputVariable, InputValue, RadioLabel, RadioInput, ContainerRadio, ContainerInputs, ContainerTitle, Title } from "./styles";
 import { FiXCircle } from "react-icons/fi";
+import { Overlay } from "../InsertValue/styles";
 
 interface InsertVariableProps {
     isOpenRemove: boolean;
@@ -9,6 +10,7 @@ interface InsertVariableProps {
 
 export const RemoveVariable = ({ isOpenRemove, openModalRemove }: InsertVariableProps) => {
     return (
+        <>
         <ContainerModal>
             <Container>
                 <FiXCircle size={30} onClick={openModalRemove} />
@@ -44,9 +46,10 @@ export const RemoveVariable = ({ isOpenRemove, openModalRemove }: InsertVariable
                         <ButtonModal color="#E91C1C" title="Remover" onClick={() => { }} />
                         <ButtonModal color="#90D74A" title="Adicionar" onClick={() => { }} />
                     </ContainerButton>
-
                 </ContainerFixed>
             </Container>
         </ContainerModal>
+        <Overlay/>
+        </>
     );
 };

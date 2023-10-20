@@ -9,27 +9,7 @@ export const Container = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  animation: showSidebar 0.4s;
 
-  > svg {
-    position: fixed;
-    color: #BCB8B1;
-    width: 30px;
-    height: 30px;
-    margin-top: 3px;
-    margin-left: 3px;
-    cursor: pointer;
-  }  
-@keyframes showSidebar {
-    from {
-      opacity: 0;
-      width: 0;
-    }
-    to {
-      opacity: 1;
-      width: 100%;
-    }
-  }
 `
 export const Content = styled.div`
     margin-top: 100px;

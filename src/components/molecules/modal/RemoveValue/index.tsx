@@ -1,29 +1,29 @@
 import ButtonModal from "../../../atoms/Buttons/ButtonModal";
-import { Container, ContainerButton, ContainerFixed, ContainerModal, InputVariable, InputValue, RadioLabel, RadioInput, ContainerRadio, ContainerInputs, ContainerTitle } from "./styles";
+import { Container, ContainerButton, ContainerFixed, ContainerModal, InputVariable, InputValue, RadioLabel, RadioInput, ContainerRadio, ContainerInputs, ContainerTitle, Title } from "./styles";
 import { FiXCircle } from "react-icons/fi";
 import { Overlay } from "../InsertValue/styles";
 
 interface InsertVariableProps {
-    isOpenInsert: boolean;
-    openModalInsert: () => void;
+    isOpenRemoveValue: boolean;
+    openModalRemoveValue: () => void;
 }
 
-export const InsertVariable = ({ isOpenInsert, openModalInsert }: InsertVariableProps) => {
+export const RemoveValue = ({ isOpenRemoveValue, openModalRemoveValue }: InsertVariableProps) => {
     return (
         <>
         <ContainerModal>
             <Container>
-                <FiXCircle size={30} onClick={openModalInsert} />
+                <FiXCircle size={30} onClick={openModalRemoveValue} />
                 <ContainerFixed>
 
                     <ContainerInputs>
-                        <ContainerTitle>
+                        <Title>
                             Variável
-                            <InputVariable type="text" placeholder="Digite a variável" />
-                        </ContainerTitle>
+                            <span><p>{"VAR1"}</p></span>
+                        </Title>
                         <ContainerTitle>
                             Valor
-                            <InputValue type="text" placeholder="Digite o valor" />
+                            <InputValue type="text" placeholder="Informe o valor" />
                         </ContainerTitle>
                     </ContainerInputs>
 

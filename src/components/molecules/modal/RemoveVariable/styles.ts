@@ -24,7 +24,16 @@ export const Container = styled.div`
   align-items: flex-end;
   justify-content: space-between;
 
+  > svg{
+    cursor: pointer;
+    background-color: #353535;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #D9D9D9;
+  }
 `;
+
 export const ContainerFixed = styled.div`
     width: 95%;
     height: 90%;

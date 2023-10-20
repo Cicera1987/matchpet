@@ -33,8 +33,6 @@ export const Container = styled.div`
     color: #D9D9D9;
   }
 `;
-
-
 export const ContainerFixed = styled.div`
     width: 95%;
     height: 90%;
@@ -92,6 +90,7 @@ export const ContainerInputs = styled.div`
     width: 100%;
     height: 90px;
     padding: 1em;
+    margin-top: auto;
     
 `
 export const ContainerTitle = styled.div`
@@ -102,5 +101,23 @@ export const ContainerTitle = styled.div`
     text-align: center;
     font-size: 25px;
     font-weight: 700;
+   
+`
+export const Title = styled.div`
+    display: flex;
+    width: 70%;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    gap: 1.5em;
+    margin-bottom: -0.5em;
+    
+    p{
+        color: #D9D9D9;
+        font-size: 18px;
+        font-weight: 600;
+    }
 `
 
