@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../../../api";
+import { routes } from "../../../router";
 import ReusableButton from "../../atoms/Buttons/ButtonDefault";
 import { ModalRegras } from "../../molecules/modal/ModalRegras";
 import Header from "../../organisms/Header";
@@ -7,11 +9,27 @@ import { Container, ContainerButton, ContainerRegras, ContainerValueRegra, Title
 
 const Regras = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [regras, setRegras] = useState([]);
 
     function openModal() {
         setIsOpen((prev) => !prev);
     }
 
+    async function fetchRegras() {
+        try {
+            const response = await api.get(routes.regras.list);
+            setRegras(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error("Ocorreu um erro ao buscar as regras:", error);
+        }
+    }
+
+    useEffect(() => {
+        fetchRegras();
+    }, [])
+
+    
 
 
     return (
