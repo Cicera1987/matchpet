@@ -2,13 +2,17 @@ import ButtonModal from "../../../atoms/Buttons/ButtonModal";
 import { Container, ContainerButton, ContainerFixed, ContainerModal, InputVariable, InputValue, RadioLabel, RadioInput, ContainerRadio, ContainerInputs, ContainerTitle } from "./styles";
 import { FiXCircle } from "react-icons/fi";
 import { Overlay } from "../InsertValue/styles";
+import { Payload } from "../../../pages/Variaveis";
 
 interface InsertVariableProps {
     isOpenInsert: boolean;
     openModalInsert: () => void;
+    CreateVariable: (Promise : any) => void;
+    name: string;
+    setName: (name: string) => void;
 }
 
-export const InsertVariable = ({ isOpenInsert, openModalInsert }: InsertVariableProps) => {
+export const InsertVariable = ({ isOpenInsert, openModalInsert, CreateVariable, name, setName }: InsertVariableProps) => {
     return (
         <>
         <ContainerModal>
@@ -19,7 +23,12 @@ export const InsertVariable = ({ isOpenInsert, openModalInsert }: InsertVariable
                     <ContainerInputs>
                         <ContainerTitle>
                             Variável
-                            <InputVariable type="text" placeholder="Digite a variável" />
+                            <InputVariable
+                             type="text" 
+                             placeholder="Digite a variável"
+                             value={name}
+                            onChange={(e:any) => setName(e.target.value)}
+                              />
                         </ContainerTitle>
                         <ContainerTitle>
                             Valor
@@ -43,8 +52,15 @@ export const InsertVariable = ({ isOpenInsert, openModalInsert }: InsertVariable
                     </ContainerRadio>
 
                     <ContainerButton>
-                        <ButtonModal color="#E91C1C" title="Remover" onClick={() => { }} />
-                        <ButtonModal color="#90D74A" title="Adicionar" onClick={() => { }} />
+                            <ButtonModal color="#E91C1C" title="Remover" onClick={()=> {}}/>
+                            <ButtonModal 
+                            color="#90D74A" 
+                            title="Adicionar" 
+                            onClick={() => CreateVariable(
+                                { payload: {
+                                    name: name,
+                                }}
+                            )} />
                     </ContainerButton>
 
                 </ContainerFixed>
@@ -54,3 +70,7 @@ export const InsertVariable = ({ isOpenInsert, openModalInsert }: InsertVariable
         </>
     );
 };
+function id(id: any): void {
+    throw new Error("Function not implemented.");
+}
+

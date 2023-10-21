@@ -10,6 +10,7 @@ import { Container, ContainerButton, ContainerRegras, ContainerValueRegra, Title
 const Regras = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [regras, setRegras] = useState([]);
+    console.log('regras: ', regras);
 
     function openModal() {
         setIsOpen((prev) => !prev);
@@ -18,12 +19,13 @@ const Regras = () => {
     async function fetchRegras() {
         try {
             const response = await api.get(routes.regras.list);
+            console.log("Response:", response);
             setRegras(response.data);
-            console.log(response.data);
         } catch (error) {
-            console.error("Ocorreu um erro ao buscar as regras:", error);
+            console.error(error);
         }
     }
+
 
     useEffect(() => {
         fetchRegras();
