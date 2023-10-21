@@ -29,6 +29,8 @@ const Variaveis = () => {
         setIsOpenRemoveValue((prev) => !prev);
     };
 
+    
+
 
     return (
         <>

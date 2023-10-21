@@ -1,0 +1,95 @@
+variaveis Animal =[
+	valor:{
+	{id: 1, name: "Raptil"},
+	{id: 1, name: "Felino"},
+	{id: 1, name: "Canino"},
+	{id: 1, name: "Ovioparo"},
+	{id: 1, name: "Roedor"},
+	}
+]
+variaveis Porte =[
+	valor:{
+	{id: 1, name: "Anão"},
+	{id: 1, name: "Medio"},
+	{id: 1, name: "Grande"},
+	{id: 1, name: "Gigante"},
+	}
+]
+
+variaveis Finalidade =[
+	valor:{
+	{id: 1, name: "Cantar"},
+	{id: 2, name: "Guiar"},
+	{id: 3, name: "Operações Policiais"},
+	{id: 4, name: "Corrida"},
+	{id: 5, name: "Caçar"},
+	{id: 6, name: "Doméstico"},
+	}
+]
+
+
+variaveis Result =[
+	felinos:{
+	{id: 1, name: "Gato"},
+	}
+]
+variaveis Result =[
+	Caninos Porte pequeno:{
+	{id: 1, name: "Chihuahua"},
+	{id: 2, name: "Pug"},
+	{id: 3, name: "Poodle"},
+	{id: 4, name: "Shih Tzu"},
+	{id: 5, name: "Yorkshire"},
+	},
+	Caninos Porte medio:{
+	{id: 1, name: "Buldogue"},
+	{id: 2, name: "Beagle"},
+	{id: 3, name: "Cocker Spaniel"},
+	{id: 4, name: "Labrador"},
+	{id: 5, name: "Pastor Alemão"},
+	},
+	Caninos Porte grande:{
+	{id: 1, name: "Boxer"},
+	{id: 2, name: "Doberman"},
+	{id: 3, name: "Husky Siberiano"},
+	{id: 4, name: "Rottweiler"},
+	{id: 5, name: "São Bernardo"},
+	},
+]
+
+variaveis Result =[
+	Roedores:{
+	{id: 1, name: "Hamster"},
+	{id: 2, name: "Porquinho da Índia"},
+	{id: 3, name: "Chinchila"},
+	{id: 4, name: "Esquilo"},
+	{id: 5, name: "Coelho"},
+	},
+]
+
+variaveis Result =[
+	Ovioparos:{
+	{id: 1, name: "Pato"},
+	{id: 2, name: "Galinha"},
+	{id: 3, name: "Ganso"},
+	{id: 4, name: "Pavão"},
+	{id: 5, name: "Peru"},
+	{id: 1, name: "Papagaio"},
+	{id: 2, name: "Calopsita"},
+	{id: 3, name: "Canário"},
+	{id: 4, name: "Cacatua"},
+	{id: 5, name: "Arara"},
+	},
+]
+
+variaveis Result =[
+	Répteis:{
+	{id: 1, name: "Tartaruga"},
+	{id: 2, name: "Iguana"},
+	{id: 3, name: "Cobra"},
+	{id: 4, name: "Lagarto"},
+	{id: 5, name: "Camaleão"},
+	},
+]
+
+

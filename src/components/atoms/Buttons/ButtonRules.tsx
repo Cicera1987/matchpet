@@ -1,26 +1,24 @@
 import React from 'react';
 
 interface ButtonProps {
-    color: string;
+    Bcolor: string;
     title: string;
     onClick?: () => void;
-    width?: string;
 }
 
-const ButtonModal: React.FC<ButtonProps> = ({ color, title, onClick, width }) => {
+const ButtonRules: React.FC<ButtonProps> = ({ Bcolor, title, onClick }) => {
     const buttonStyle = {
-        width: width || '120px',
+        width: '120px',
         height: '40px',
-        backgroundColor: color,
-        color: 'white',
+        backgroundColor: Bcolor,
+        color: 'red',
         padding: '10px 20px',
         borderRadius: '5px',
         cursor: 'pointer',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        fontSise: '16px',
-        fontWeight: 'bold',
+        fontWeight: '700',
+        fontSize: '25px',
         border: 'none',
+    
     };
 
     return (
@@ -30,4 +28,4 @@ const ButtonModal: React.FC<ButtonProps> = ({ color, title, onClick, width }) =>
     );
 };
 
-export default ButtonModal;
+export default ButtonRules;

@@ -155,4 +155,70 @@ export const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   z-index: 5;
 `
+export const ContainerFixedInput = styled.div`
+    width: 100%;
+    height: 350px;
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: flex-start;
+    justify-content: space-between;
+`;
+
+
+
+export const ContainerInputs = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+`
+
+export const ContainerResult = styled.div`
+    width: 100%;
+    height: 40px;
+    background-color: #BCB8B1;
+    border-radius: 10px;
+
+    h2{
+        font-size: 20px;
+        font-weight: 700;
+        color: #353535;
+        top: 0;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+`
+
+export const ContainerButtonsValidate = styled.div`
+    width: 50px;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+  
+
+`
+
+export const Button = styled.button`
+  width: 40px;
+  height: 20px;
+  border: none;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 2px;
+
+  &:hover {
+    color:  #BCB8B1;
+  }
+`
 
