@@ -1,46 +1,81 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MatchPet Frontend
 
-## Available Scripts
+## Descrição
+O projeto "MatchPet" é a interface do usuário para o sistema especialista de adoção de animais de estimação, criado com React.js e TypeScript. Este frontend permite que os usuários interajam com o sistema, visualizem as regras e façam a adoção de animais.
 
-In the project directory, you can run:
+## Pré-requisitos
+Antes de começar, certifique-se de ter as seguintes ferramentas e serviços instalados e configurados em sua máquina:
 
-### `npm start`
+- **Node.js** (v16.16.0 ou versão posterior) - Você pode verificar a versão do Node.js instalada com o seguinte comando:
+  ```bash
+  node --version
+  ```
+________________________________________________________________________________________________________________
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Instalação e Configuração
+Siga estas etapas para instalar e configurar o projeto "MatchPet Frontend":
 
-### `npm test`
+1. Clone o projeto do repositório:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone https://github.com/Cicera1987/matchpet.git
+   ```
 
-### `npm run build`
+2. Navegue para o diretório do projeto:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   cd matchpet
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Instale as dependências do projeto usando o npm:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+4. Configure a URL de conexão com o backend:
+   - Abra o arquivo `.env` na raiz do projeto.
+   - Defina a variável de ambiente `REACT_APP_API_URL` para a URL de conexão com o backend. Por exemplo:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   ```env
+   REACT_APP_API_URL=http://localhost:porta/api
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   Certifique-se de substituir `http://localhost:porta/api` pela URL correta do seu backend.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+________________________________________________________________________________________________________________
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Uso
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Após a instalação e configuração, você pode iniciar o servidor de desenvolvimento para executar o projeto:
+
+```bash
+npm start
+```
+
+Isso iniciará o servidor de desenvolvimento e abrirá o aplicativo no navegador. Você poderá acessar a interface do usuário e interagir com o sistema especialista de adoção de animais.
+
+
+
+________________________________________________________________________________________________________________
+
+## Funcionalidades
+- **Listar Regras**: Visualize a lista de regras do sistema.
+- **Adoção de Animais**: Faça a adoção de animais de estimação seguindo as regras do sistema.
+
+
+
+________________________________________________________________________________________________________________
+## Autor
+- Cicera Ribeiro 
+
+
+
+________________________________________________________________________________________________________________
+## Agradecimentos
+
+Obrigada por usar o projeto "MatchPet"!
