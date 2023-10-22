@@ -30,32 +30,7 @@ const Regras = () => {
         setIsOpen((prev) => !prev);
     }
 
-    function generateNumericValues() {
-        const values = [];
-        for (let i = 10; i <= 100; i += 10) {
-            values.push({
-                id: i,
-                name: i.toString()
-            });
-        }
-        return values;
-    }
-
-    function generateMultivaluedValues() {
-        const values = [
-            { id: 1, name: "Réptil" },
-            { id: 2, name: "Felino" },
-            { id: 3, name: "Canino" },
-            { id: 4, name: "Oviparo" },
-            { id: 5, name: "Roedor" }
-        ];
-        return values;
-    }
-
-    function generateUnivaluedValue(valueName: any) {
-        return [{ id: 1, name: valueName }];
-    }
-
+   
     async function fetchRegras({ limit, page }:any) {
         try {
             const response = await api.get(routes.regras.list, {
@@ -69,7 +44,6 @@ const Regras = () => {
             console.error(error);
         }
     }
-
 
 
     useEffect(() => {
