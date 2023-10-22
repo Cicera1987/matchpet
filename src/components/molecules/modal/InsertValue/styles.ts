@@ -55,6 +55,14 @@ export const InputVariable = styled.input`
 
 `;
 
+export const SelectVariable = styled.select`
+  width: 172px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;
 export const InputValue = styled.input`
   width: 150px;
   padding: 10px;

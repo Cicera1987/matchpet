@@ -7,19 +7,65 @@ import Header from "../../organisms/Header";
 import TemplateMatch from "../../template/Match/templateMatch";
 import { Container, ContainerButton, ContainerRegras, ContainerValueRegra, TitleRegras } from "./styles";
 
+
+
+export interface Payload {
+    id: number;
+    name: string;
+    type: string | null;
+    values: {
+        id: number;
+        name: string;
+        type: string;
+        id_variable: number;
+    }[];
+}
+
+
 const Regras = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [regras, setRegras] = useState([]);
+    
     console.log('regras: ', regras);
 
     function openModal() {
         setIsOpen((prev) => !prev);
     }
 
-    async function fetchRegras() {
+    function generateNumericValues() {
+        const values = [];
+        for (let i = 10; i <= 100; i += 10) {
+            values.push({
+                id: i,
+                name: i.toString()
+            });
+        }
+        return values;
+    }
+
+    function generateMultivaluedValues() {
+        const values = [
+            { id: 1, name: "Réptil" },
+            { id: 2, name: "Felino" },
+            { id: 3, name: "Canino" },
+            { id: 4, name: "Oviparo" },
+            { id: 5, name: "Roedor" }
+        ];
+        return values;
+    }
+
+    function generateUnivaluedValue(valueName: any) {
+        return [{ id: 1, name: valueName }];
+    }
+
+    async function fetchRegras({ limit, page }:any) {
         try {
-            const response = await api.get(routes.regras.list);
-            console.log("Response:", response);
+            const response = await api.get(routes.regras.list, {
+                params: {
+                    limit,
+                    page
+                }
+            });
             setRegras(response.data);
         } catch (error) {
             console.error(error);
@@ -27,8 +73,14 @@ const Regras = () => {
     }
 
 
+
     useEffect(() => {
-        fetchRegras();
+        fetchRegras(
+            {
+                limit: 1000,
+                page: 1
+            }
+        );
     }, [])
 
     
