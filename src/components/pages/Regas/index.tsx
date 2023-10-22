@@ -8,7 +8,6 @@ import TemplateMatch from "../../template/Match/templateMatch";
 import { Container, ContainerButton, ContainerRegras, ContainerValueRegra, TitleRegras } from "./styles";
 
 
-
 export interface Payload {
     id: number;
     name: string;

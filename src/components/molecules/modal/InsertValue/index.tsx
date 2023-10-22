@@ -20,12 +20,13 @@ export const InsertValue = ({ isOpenValue, openModalInsertValue, CreateRules, va
     const [type, setType] = useState('');
 
 
+
     const options: Option[] = [
         { label: 'Numérica', value: 'Numérica' },
         { label: 'Multivalorada', value: 'Multivalorada' },
         { label: 'Univalorada', value: 'Univalorada' },
     ];
-  
+
 
     return (
         <>
@@ -44,21 +45,22 @@ export const InsertValue = ({ isOpenValue, openModalInsertValue, CreateRules, va
                                     value={selectedVariable}
                                     onChange={(e: any) => setSelectedVariable(e.target.value)}
                                 >
-                                    <option value="" disabled selected>Selecione</option> 
+                                    <option value="" disabled selected>Selecione</option>
                                     {variables.map((variable: any) => (
-                                        <option key={variable.id} value={variable.id}>
-                                            {variable.id}
+                                        <option key={variable.id}
+                                            value={variable.id}>
+                                            {variable.name}
                                         </option>
                                     ))}
                                 </SelectVariable>
                             </ContainerTitle>
                             <ContainerTitle>
                                 Valor
-                                <InputValue 
-                                type="text" 
-                                placeholder="Infome o valor"
-                                value={value}
-                                onChange={(e: any) => setValue(e.target.value)}
+                                <InputValue
+                                    type="text"
+                                    placeholder="Infome o valor"
+                                    value={value}
+                                    onChange={(e: any) => setValue(e.target.value)}
                                 />
                             </ContainerTitle>
                         </ContainerInputs>
@@ -76,9 +78,8 @@ export const InsertValue = ({ isOpenValue, openModalInsertValue, CreateRules, va
                                 </RadioLabel>
                             ))}
                         </ContainerRadio>
-
                         <ContainerButton>
-                            <ButtonModal color="#E91C1C" title="Remover" onClick={() => { }} />
+                            <ButtonModal color="#E91C1C" title="Cancelar" onClick={() => openModalInsertValue()} />
                             <ButtonModal
                                 color="#90D74A"
                                 title="Adicionar"
@@ -86,18 +87,13 @@ export const InsertValue = ({ isOpenValue, openModalInsertValue, CreateRules, va
                                     const rulesPayload = {
                                         name: value,
                                         type: type,
-                                        id_variable: selectedVariable
+                                        id_variable: Number(selectedVariable)
                                     }
                                     CreateRules(rulesPayload);
+                                    openModalInsertValue()
                                 }}
-
-
-                              
-
                             />
-
                         </ContainerButton>
-
                     </ContainerFixed>
                 </Container>
             </ContainerModal>

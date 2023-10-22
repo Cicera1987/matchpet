@@ -13,16 +13,16 @@ import { Container, ContainerButton, ContainerValor, ContainerValues, ContainerV
 export interface Payload {
     id: number;
     name: string;
-    values: PayloadRules[];
-    
+    Values: PayloadRules[];
+
 }
 
 export interface PayloadRules {
-        id: number;
-        name: string;
-        type: string;
-        id_variable: number;
-    }
+    id: number;
+    name: string;
+    type: string;
+    id_variable: number;
+}
 
 
 const Variaveis = () => {
@@ -31,9 +31,10 @@ const Variaveis = () => {
     const [isOpenValue, setIsOpenValue] = useState(false)
     const [isOpenRemoveValue, setIsOpenRemoveValue] = useState(false)
     const [variables, setVariables] = useState<Payload[]>([])
+    const [values, setValues] = useState<any[]>()
     const [rules, setRules] = useState<PayloadRules[]>([])
 
-   
+
     function generateNumericValues() {
         const values = [];
         for (let i = 10; i <= 100; i += 10) {
@@ -56,7 +57,7 @@ const Variaveis = () => {
         return values;
     }
 
-    function generateUnivaluedValue(valueName:string, id:number) {
+    function generateUnivaluedValue(valueName: string, id: number) {
         return [{ id: id, name: valueName }];
     }
 
@@ -94,7 +95,7 @@ const Variaveis = () => {
             const response = await api.post(routes.variaveis.postVariables, {
                 id: payload.id,
                 name: payload.name,
-                
+
             });
             if (response.status === 200) {
                 const { data } = response;
@@ -105,9 +106,8 @@ const Variaveis = () => {
         }
     }
 
-    async function CreateRules({ payload }: { payload: PayloadRules }) {
+    async function CreateRules(payload: PayloadRules) {
         try {
-
             let values = [];
 
             if (payload?.type === "numerica") {
@@ -122,12 +122,13 @@ const Variaveis = () => {
                 name: payload?.name,
                 id_variable: payload?.id_variable,
                 type: payload?.type
-                
+
             });
             if (response.status === 200) {
                 const { data } = response;
                 setRules(data);
             }
+            fetchVariables({limit: 1000, page: 1})
         } catch (error) {
             console.error("Error:", error);
         }
@@ -149,7 +150,7 @@ const Variaveis = () => {
                         <TitleVariaveis> Variável </TitleVariaveis>
                         {Array.isArray(variables) ? (
                             variables.map((variable) => (
-                                <ContainerValues key={variable.id}>
+                                <ContainerValues key={variable.id} onClick={() => setValues(variable.Values)}>
                                     <TitleValues>{variable.name}</TitleValues>
                                 </ContainerValues>
                             ))
@@ -158,10 +159,14 @@ const Variaveis = () => {
                         )}
                     </ContainerVariaveis>
                     <ContainerValor>
-                        <TitleVariaveis> Valor </TitleVariaveis>
-                                <ContainerValues>  
-                                        <TitleValues></TitleValues>                             
+                        {
+                            values?.map((props) => (
+                                <ContainerValues>
+                                    <TitleValues>{props.name}</TitleValues>
                                 </ContainerValues>
+                            ))
+
+                        }
                     </ContainerValor>
                     <ContainerButton>
                         <ReusableButton color="#90D74A" title="Criar Variavel" onClick={openModalInsert} />
