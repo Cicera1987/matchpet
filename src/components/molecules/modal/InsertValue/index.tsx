@@ -16,12 +16,9 @@ interface Option {
 
 export const InsertValue = ({ isOpenValue, openModalInsertValue, CreateRules, variables }: InsertVariableProps) => {
     const [selectedVariable, setSelectedVariable] = useState('');
-    const [selectedVariableId, setSelectedVariableId] = useState(null);
     const [value, setValue] = useState('');
     const [type, setType] = useState('');
-    console.log('type: ', type);
 
-    console.log('selectedVariable: ', selectedVariable);
 
     const options: Option[] = [
         { label: 'Numérica', value: 'Numérica' },
@@ -49,8 +46,8 @@ export const InsertValue = ({ isOpenValue, openModalInsertValue, CreateRules, va
                                 >
                                     <option value="" disabled selected>Selecione</option> 
                                     {variables.map((variable: any) => (
-                                        <option key={variable.id} value={variable.name}>
-                                            {variable.name}
+                                        <option key={variable.id} value={variable.id}>
+                                            {variable.id}
                                         </option>
                                     ))}
                                 </SelectVariable>

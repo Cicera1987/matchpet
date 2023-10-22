@@ -26,8 +26,6 @@ const Regras = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [regras, setRegras] = useState([]);
     
-    console.log('regras: ', regras);
-
     function openModal() {
         setIsOpen((prev) => !prev);
     }

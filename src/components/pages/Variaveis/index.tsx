@@ -32,7 +32,6 @@ const Variaveis = () => {
     const [isOpenRemoveValue, setIsOpenRemoveValue] = useState(false)
     const [variables, setVariables] = useState<Payload[]>([])
     const [rules, setRules] = useState<PayloadRules[]>([])
-    console.log('rules: ', rules);
 
    
     function generateNumericValues() {
@@ -130,7 +129,7 @@ const Variaveis = () => {
                 setRules(data);
             }
         } catch (error) {
-            console.log("Error:", error);
+            console.error("Error:", error);
         }
     }
 
