@@ -28,9 +28,7 @@ export interface PayloadRules {
 
 const Variaveis = () => {
     const [isOpenInsert, setIsOpenInsert] = useState(false)
-    const [isOpenRemove, setIsOpenRemove] = useState(false)
     const [isOpenValue, setIsOpenValue] = useState(false)
-    const [isOpenRemoveValue, setIsOpenRemoveValue] = useState(false)
     const [variables, setVariables] = useState<Payload[]>([])
     const [values, setValues] = useState<any[]>()
     const [rules, setRules] = useState<PayloadRules[]>([])
@@ -38,16 +36,8 @@ const Variaveis = () => {
     const openModalInsert = () => {
         setIsOpenInsert((prev) => !prev);
     };
-
-    const openModalRemove = () => {
-        setIsOpenRemove((prev) => !prev);
-    };
     const openModalInsertValue = () => {
         setIsOpenValue((prev) => !prev);
-    };
-
-    const openModalRemoveValue = () => {
-        setIsOpenRemoveValue((prev) => !prev);
     };
 
     const fetchVariables = async ({ limit, page }: any) => {
@@ -102,18 +92,18 @@ const Variaveis = () => {
                 const { data } = response;
                 setRules(data);
             }
-            fetchVariables({limit: 1000, page: 1})
+            fetchVariables({limit: 100, page: 1})
         } catch (error) {
             console.error("Error:", error);
         }
     }
 
     useEffect(() => {
-        fetchVariables({
-            limit: 1000,
-            page: 1
-        });
+        fetchVariables({ limit: 100, page: 1});
     }, []);
+
+
+
 
     return (
         <>
@@ -144,16 +134,12 @@ const Variaveis = () => {
                     </ContainerValor>
                     <ContainerButton>
                         <ReusableButton color="#90D74A" title="Criar Variavel" onClick={openModalInsert} />
-                        <ReusableButton color="#E91C1C" title="Remover Variável" onClick={openModalRemove} />
-                        <ReusableButton color="#90D74A" title="Criar Valor" onClick={openModalInsertValue} />
-                        <ReusableButton color="#E91C1C" title="Remover Valor" onClick={openModalRemoveValue} />
+                        <ReusableButton color="#F9D34C" title="Criar Valor" onClick={openModalInsertValue} />
                     </ContainerButton>
                 </Container>
             </TemplateMatch>
             {isOpenInsert && <InsertVariable isOpenInsert={isOpenInsert} openModalInsert={openModalInsert} CreateVariable={CreateVariable} />}
-            {isOpenRemove && <RemoveVariable isOpenRemove={isOpenRemove} openModalRemove={openModalRemove} />}
             {isOpenValue && <InsertValue isOpenValue={isOpenValue} openModalInsertValue={openModalInsertValue} variables={variables} CreateRules={CreateRules} />}
-            {isOpenRemoveValue && <RemoveValue isOpenRemoveValue={isOpenRemoveValue} openModalRemoveValue={openModalRemoveValue} />}
         </>
     );
 };

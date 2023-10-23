@@ -14,7 +14,7 @@ export const InputWrapper = styled.div`
 `;
 
 export const InputSelect = styled.select`
-  width: 120px;
+  width: 130px;
   padding-right: 30px; 
   border: 1px solid #ccc;
   border-radius: 5px;

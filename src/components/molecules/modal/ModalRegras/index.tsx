@@ -74,7 +74,7 @@ export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
 
                             <ContainerFixedInput>
                                 <InputVariables
-                                    title={"Variável"}
+                                    title={"Selecione"}
                                     options={data}
                                     handleChange={(e) => setForm({ ...form, question1: e.target.value })}
                                 />
@@ -83,12 +83,12 @@ export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
                                     <Button >&&</Button>
                                 </ContainerButtonsValidate>
                                 <InputVariables
-                                    title={"Valor"}
+                                    title={"Selecione"}
                                     options={allValues.filter((item) => item.id_variable === Number(form.question1)).map((item) => ({label: item.name, value: item.id}))}
                                 />
 
                                 <InputVariables
-                                    title={"Variável"}
+                                    title={"Selecione"}
                                     options={data}
                                     handleChange={(e) => setForm({ ...form, request_02: e.target.value })}
                                 />
@@ -99,17 +99,17 @@ export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
                                 </ContainerButtonsValidate>
 
                                 <InputVariables
-                                    title={"Valor"}
+                                    title={"Selecione"}
                                     options={allValues.filter((item) => item.id_variable === Number(form.request_02)).map((item) => ({ label: item.name, value: item.id }))}
                                 />
                                 <InputVariables
-                                    title={"Variável"}
+                                    title={"Selecione"}
                                     options={data}
                                     handleChange={(e) => setForm({ ...form, request_03: e.target.value })}
                                 />
                                 <h2>=</h2>
                                 <InputVariables
-                                    title={"Valor"}
+                                    title={"Selecione"}
                                     options={allValues.filter((item) => item.id_variable === Number(form.request_03)).map((item) => ({ label: item.name, value: item.id }))}
                                 />
                             </ContainerFixedInput>
@@ -118,7 +118,7 @@ export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
                             <ButtonRules Bcolor="#FFFFFF" title="ENTÃO" onClick={() => { }} />
                             <ContainerFixedInput>
                                 <ContainerResult>
-                                    <h2>Rescultado  =  { } </h2>
+                                    <h2>  Rescultado  = </h2>
                                 </ContainerResult>
                             </ContainerFixedInput>
                         </Containervalidate>

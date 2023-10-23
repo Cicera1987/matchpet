@@ -9,6 +9,7 @@ export const routes = {
         list: '/api/variable',
         postVariables: '/api/variable',
         addValue: '/Api/addValue',
+        deleteVariable: '/api/variable/:id',
     }
     
 }
