@@ -3,7 +3,7 @@ variaveis Animal =[
 	{id: 1, name: "Raptil"},
 	{id: 1, name: "Felino"},
 	{id: 1, name: "Canino"},
-	{id: 1, name: "Ovioparo"},
+	{id: 1, name: "Oviparo"},
 	{id: 1, name: "Roedor"},
 	}
 ]

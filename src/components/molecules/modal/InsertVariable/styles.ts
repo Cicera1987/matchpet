@@ -65,27 +65,6 @@ export const InputValue = styled.input`
   font-size: 14px;
   margin-bottom: 10px;
 `;
-export const RadioLabel = styled.label`
-  display: flex;
-  align-items: center;
-  margin-right: 10px; 
- 
-`;
-
-export const RadioInput = styled.input`
-  margin-right: 5px;
- 
- 
-`;
-
-export const ContainerRadio = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1em;
-    font-weight: 700;
-    margin-bottom: 10px;
-`
 export const ContainerInputs = styled.div`
     display: flex;
     flex-direction: column;

@@ -1,5 +1,5 @@
 import ButtonModal from "../../../atoms/Buttons/ButtonModal";
-import { Container, ContainerButton, ContainerFixed, ContainerModal, InputVariable, InputValue, RadioLabel, RadioInput, ContainerRadio, ContainerInputs, ContainerTitle } from "./styles";
+import { Container, ContainerButton, ContainerFixed, ContainerModal, InputVariable, ContainerInputs, ContainerTitle } from "./styles";
 import { FiXCircle } from "react-icons/fi";
 import { Overlay } from "../InsertValue/styles";
 import { useState } from "react";
@@ -34,22 +34,6 @@ export const InsertVariable = ({ isOpenInsert, openModalInsert, CreateVariable }
                             </ContainerTitle>
                             
                         </ContainerInputs>
-
-                        <ContainerRadio>
-                            <RadioLabel>
-                                <RadioInput disabled={true} type="radio" name="variableType" value="numerica" />
-                                Numérica
-                            </RadioLabel>
-                            <RadioLabel>
-                                <RadioInput disabled={true} type="radio" name="variableType" value="multivalorada" />
-                                Multivalorada
-                            </RadioLabel>
-                            <RadioLabel>
-                                <RadioInput disabled={true} type="radio" name="variableType" value="univalorada" />
-                                Univalorada
-                            </RadioLabel>
-                        </ContainerRadio>
-
                         <ContainerButton>
                             <ButtonModal color="#E91C1C" title="Remover" onClick={() => { }} />
                             <ButtonModal
@@ -60,6 +44,7 @@ export const InsertVariable = ({ isOpenInsert, openModalInsert, CreateVariable }
                                         name: name,
                                     };
                                     CreateVariable({ payload: updatedPayload });
+                                    openModalInsert();
                                 }}
                             />
                         </ContainerButton>

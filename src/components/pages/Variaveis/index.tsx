@@ -8,6 +8,7 @@ import { RemoveValue } from "../../molecules/modal/RemoveValue";
 import { RemoveVariable } from "../../molecules/modal/RemoveVariable";
 import Header from "../../organisms/Header";
 import TemplateMatch from "../../template/Match/templateMatch";
+import { generateMultivaluedValues, generateNumericValues, generateUnivaluedValue } from "./logic";
 import { Container, ContainerButton, ContainerValor, ContainerValues, ContainerVariaveis, TitleValues, TitleVariaveis } from "./styles";
 
 export interface Payload {
@@ -33,33 +34,6 @@ const Variaveis = () => {
     const [variables, setVariables] = useState<Payload[]>([])
     const [values, setValues] = useState<any[]>()
     const [rules, setRules] = useState<PayloadRules[]>([])
-
-
-    function generateNumericValues() {
-        const values = [];
-        for (let i = 10; i <= 100; i += 10) {
-            values.push({
-                id: i,
-                name: i.toString()
-            });
-        }
-        return values;
-    }
-
-    function generateMultivaluedValues() {
-        const values = [
-            { id: 1, name: "Réptil" },
-            { id: 2, name: "Felino" },
-            { id: 3, name: "Canino" },
-            { id: 4, name: "Oviparo" },
-            { id: 5, name: "Roedor" }
-        ];
-        return values;
-    }
-
-    function generateUnivaluedValue(valueName: string, id: number) {
-        return [{ id: id, name: valueName }];
-    }
 
     const openModalInsert = () => {
         setIsOpenInsert((prev) => !prev);
