@@ -1,4 +1,4 @@
-variaveis Animal =[
+variaveis Tipo =[
 	valor:{
 	{id: 1, name: "Raptil"},
 	{id: 1, name: "Felino"},
@@ -9,7 +9,7 @@ variaveis Animal =[
 ]
 variaveis Porte =[
 	valor:{
-	{id: 1, name: "Anão"},
+	{id: 1, name: "Pequeno"},
 	{id: 1, name: "Medio"},
 	{id: 1, name: "Grande"},
 	{id: 1, name: "Gigante"},
