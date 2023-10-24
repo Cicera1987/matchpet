@@ -217,10 +217,12 @@ export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVa
                         <ButtonModal color="#255111" title="Incluir" onClick={() => { }} />
                         <ButtonModal color="#F9D34C" title="Alterar" onClick={() => { }} />
                         <ButtonModal color="#E91C1C" title="Cancelar" onClick={openModal} />
-                        <button
+                        <ButtonModal
+                            color="#90D74A"
+                            title="Salvar"
                             onClick={() =>
                                 CreateRules('Regra', form)}
-                        >Salvar</button>
+                        />
                     </ContainerButton>
 
                 </Container>

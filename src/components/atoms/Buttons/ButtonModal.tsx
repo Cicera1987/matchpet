@@ -1,9 +1,10 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React from 'react';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{
+interface ButtonProps {
     color: string;
     title: string;
     width?: string;
+    onClick?: () => void;
 }
 
 const ButtonModal: React.FC<ButtonProps> = ({ color, title, onClick, width, ...props }) => {
@@ -23,7 +24,7 @@ const ButtonModal: React.FC<ButtonProps> = ({ color, title, onClick, width, ...p
     };
 
     return (
-        <button style={buttonStyle} {...props}>
+        <button style={buttonStyle} onClick={onClick}>
             {title}
         </button>
     );

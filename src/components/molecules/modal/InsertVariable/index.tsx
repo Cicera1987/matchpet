@@ -35,7 +35,7 @@ export const InsertVariable = ({ isOpenInsert, openModalInsert, CreateVariable }
                             
                         </ContainerInputs>
                         <ContainerButton>
-                            <ButtonModal color="#E91C1C" title="Remover" onClick={() => { }} />
+                            <ButtonModal color="#E91C1C" title="Cancelar" onClick={openModalInsert} />
                             <ButtonModal
                                 color="#90D74A"
                                 title="Adicionar"
