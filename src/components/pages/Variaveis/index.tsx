@@ -53,6 +53,7 @@ const Variaveis = () => {
             console.error("Error:", error);
         }
     };
+
     async function CreateVariable({ payload }: { payload: Payload }) {
         try {
 
@@ -68,6 +69,7 @@ const Variaveis = () => {
         } catch (error) {
             console.error("Error:", error);
         }
+        fetchVariables({ limit: 100, page: 1 })
     }
 
     async function CreateRules(payload: PayloadRules) {
@@ -96,6 +98,8 @@ const Variaveis = () => {
         } catch (error) {
             console.error("Error:", error);
         }
+        
+        fetchVariables({ limit: 100, page: 1 })
     }
 
     useEffect(() => {

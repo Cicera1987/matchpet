@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import api from "../../../api";
 import { routes } from "../../../router";
 import ReusableButton from "../../atoms/Buttons/ButtonDefault";
@@ -11,26 +11,25 @@ import { Container, ContainerButton, ContainerRegras, ContainerValueRegra, Title
 export interface Payload {
     id: number;
     name: string;
-    type: string | null;
     values: {
         id: number;
-        name: string;
+        operator: string
+        value: string
         type: string;
+        id_rule: number
         id_variable: number;
     }[];
 }
 
-
 const Regras = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [regras, setRegras] = useState([]);
-    
+    const [regras, setRegras] = useState<Payload[]>([]);
+
     function openModal() {
         setIsOpen((prev) => !prev);
     }
 
-   
-    async function fetchRegras({ limit, page }:any) {
+    async function fetchRegras({ limit, page }: any) {
         try {
             const response = await api.get(routes.regras.list, {
                 params: {
@@ -38,12 +37,12 @@ const Regras = () => {
                     page
                 }
             });
+            console.log(response.data);
             setRegras(response.data);
         } catch (error) {
             console.error(error);
         }
     }
-
 
     useEffect(() => {
         fetchRegras(
@@ -54,23 +53,22 @@ const Regras = () => {
         );
     }, [])
 
-    
-
-
     return (
         <>
             <TemplateMatch title="Regras" >
                 <Header />
                 <Container>
                     <ContainerRegras>
-                        <ContainerValueRegra>
-                            <TitleRegras>
-                                Regra 01
-                            </TitleRegras>
-                            <TitleRegras>
-                                Cachorro
-                            </TitleRegras>
-                        </ContainerValueRegra>
+                        {regras.map((item: any) => (
+                            <ContainerValueRegra>
+                                <TitleRegras>
+                                    Regra {item.id}
+                                </TitleRegras>
+                                <TitleRegras>
+                                    {item.name}
+                                </TitleRegras>
+                            </ContainerValueRegra>
+                        ))}
                     </ContainerRegras>
                     <ContainerButton>
                         <ReusableButton color="#90D74A" title="Criar Regra" onClick={openModal} />
@@ -78,8 +76,7 @@ const Regras = () => {
                     </ContainerButton>
                 </Container>
             </TemplateMatch>
-
-            {isOpen && <ModalRegras isOpen={isOpen} openModal={openModal} />}
+            {isOpen && <ModalRegras {...{ isOpen, openModal, fetchRegras, regras}} />}
         </>
     )
 }

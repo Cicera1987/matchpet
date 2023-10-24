@@ -13,27 +13,73 @@ import {
     ContainerButtonsValidate,
     Button
 } from "./styles";
-
 import { FiXCircle } from "react-icons/fi";
 import ButtonRules from "../../../atoms/Buttons/ButtonRules";
 import api from '../../../../api/index'
 import { routes } from '../../../../router/index'
+import { InputVariables, Option } from "../../../atoms/Inputs/InputVariables";
+import { useCallback, useState, useEffect } from "react";
+import { Payload } from "../../../pages/Regras";
 
 interface InsertVariableProps {
     isOpen: boolean;
     openModal: () => void;
+    fetchRegras({ limit, page }: any): Promise<void>
+    regras: Payload[]
 }
-import {InputVariables, Option} from "../../../atoms/Inputs/InputVariables";
-import {useCallback, useState, useEffect} from "react";
 
-export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
+interface IConditions {
+    id: number;
+    operator: string
+    value: string
+    type: string;
+    id_rule: number
+    id_variable: number;
+}
+
+export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVariableProps) => {
     const [data, setData] = useState<Option[]>([])
     const [allValues, setAllValues] = useState<any[]>([])
-    const [form, setForm] = useState<Record<string, any>>({
-        request_01: '',
-        request_02: '',
-        request_03: '',
-    })
+    const [andOperator, setAndOperator] = useState('')
+    const [orOperator, setOrOperator] = useState('')
+    const [values, setValues] = useState<string[]>([]);
+    const [operators, setOperators] = useState<string[]>([]);
+    const [lastID, setLastId] = useState<number>(regras[regras.length - 1].id)
+
+    const newdata = data.filter((item) => item.label !== "Animal")
+        .map((props: any) => ({ label: props.label, value: props.value }))
+    const newdataAnimaL = data.filter((item) => item.label === "Animal")
+        .map((props: any) => ({ label: props.label, value: props.value }))
+
+    const [form, setForm] = useState<Record<string, any>>({})
+
+
+    function BuilderCondition(operator: string, valor: string, type: 'IF' | 'THEN', id_variable: string) {
+        return {
+            operator: operator,
+            value: valor,
+            type: type,
+            id_rule: lastID + 1,
+            id_variable: Number(id_variable)
+        } as IConditions
+    }
+
+    function constructorPayload(form: Record<string, any>){
+        const arr = []
+
+        for (var i = 1; i < 5; i++) {
+            if (i == 4) {
+                arr.push(BuilderCondition(form[`operator${i}`], form[`valuevariable${i}`], 'THEN', form[`variable${i}`]))
+                break
+            }
+            if (form.hasOwnProperty(`operator${i}`) && form.hasOwnProperty(`valuevariable${i}`) && form.hasOwnProperty(`variable${i}`)) {
+                let temp = BuilderCondition(form[`operator${i}`], form[`valuevariable${i}`], 'IF', form[`variable${i}`])
+                arr.push(temp)
+            }
+        }
+
+        return arr
+    }
 
     const Fetch = useCallback(async (page: number, limit: number) => {
         const { data } = await api.get(routes.variaveis.list, {
@@ -46,19 +92,38 @@ export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
         setAllValues(resolveMatriz(data.map((props: any) => props.Values)))
     }, [])
 
-    useEffect(() => {
-        Fetch(1, 100)
-    }, [])
 
-    function resolveMatriz(mtx: any[][]){
+
+    async function CreateRules(name: string, form: Record<string, any>) {
+
+        const Conditionals = constructorPayload(form)
+
+        try {
+            await api.post(routes.regras.postRules, {
+                name: name,
+                Condition: Conditionals
+            });
+            return fetchRegras({ limit: 1000, page: 1 })
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+
+    function resolveMatriz(mtx: any[][]) {
         let arr = []
-        for(let i = 0; i < mtx.length; i++) {
-            for(let j = 0; j < mtx[i].length; j++) {
+        for (let i = 0; i < mtx.length; i++) {
+            for (let j = 0; j < mtx[i].length; j++) {
                 arr.push(mtx[i][j])
             }
         }
         return arr
-    }    
+    }
+
+    useEffect(() => {
+        Fetch(1, 100)
+    }, [])
+
 
     return (
         <>
@@ -73,53 +138,77 @@ export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
                             <ButtonRules Bcolor="#FFFFFF" title="SE" onClick={() => { }} />
 
                             <ContainerFixedInput>
-                                <InputVariables
-                                    title={"Selecione"}
-                                    options={data}
-                                    handleChange={(e) => setForm({ ...form, question1: e.target.value })}
-                                />
-                                <ContainerButtonsValidate>
+                                <>
+                                    <InputVariables
+                                        title={"Selecione"}
+                                        options={newdata}
+                                        handleChange={(e) => setForm({ ...form, variable1: e.target.value })}
+                                    />
+                                    <ContainerButtonsValidate>
+                                        <h2>=</h2>
+                                        <Button value="&&" onClick={(e: any) => setForm({ ...form, operator1: '&&' })}>&&</Button>
+                                        <Button value="||" onClick={(e: any) => setForm({ ...form, operator1: '||' })} >||</Button>
+                                        <Button value="||" onClick={(e: any) => setForm({ ...form, operator1: '' })} >Nenhum</Button>
+                                    </ContainerButtonsValidate>
+                                    <InputVariables
+                                        title={"Selecione"}
+                                        options={allValues.filter((item) => item.id_variable === Number(form.variable1)).map((item) => ({ label: item.name, value: item.name }))}
+                                        handleChange={(e) => setForm({ ...form, valuevariable1: e.target.value })}
+                                    />
+                                </>
+
+                                <>
+                                    <InputVariables
+                                        title={"Selecione"}
+                                        options={newdata}
+                                        handleChange={(e) => setForm({ ...form, variable2: e.target.value })}
+                                    />
+
+                                    <ContainerButtonsValidate>
+                                        <h2>=</h2>
+                                        <Button value="&&" onClick={(e: any) => setForm({ ...form, operator2: '&&' })}>&&</Button>
+                                        <Button value="||" onClick={(e: any) => setForm({ ...form, operator2: '||' })} >||</Button>
+                                        <Button value="||" onClick={(e: any) => setForm({ ...form, operator2: '' })} >Nenhum</Button>
+                                    </ContainerButtonsValidate>
+
+                                    <InputVariables
+                                        title={"Selecione"}
+                                        options={allValues.filter((item) => item.id_variable === Number(form.variable2)).map((item) => ({ label: item.name, value: item.name }))}
+                                        handleChange={(e) => setForm({ ...form, valuevariable2: e.target.value })}
+                                    />
+                                </>
+                                <>
+                                    <InputVariables
+                                        title={"Selecione"}
+                                        options={newdata}
+                                        handleChange={(e) => setForm({ ...form, variable3: e.target.value })}
+                                    />
                                     <h2>=</h2>
-                                    <Button >&&</Button>
-                                </ContainerButtonsValidate>
-                                <InputVariables
-                                    title={"Selecione"}
-                                    options={allValues.filter((item) => item.id_variable === Number(form.question1)).map((item) => ({label: item.name, value: item.id}))}
-                                />
-
-                                <InputVariables
-                                    title={"Selecione"}
-                                    options={data}
-                                    handleChange={(e) => setForm({ ...form, request_02: e.target.value })}
-                                />
-
-                                <ContainerButtonsValidate>
-                                    <h2>=</h2>
-                                    <Button>| |</Button>
-                                </ContainerButtonsValidate>
-
-                                <InputVariables
-                                    title={"Selecione"}
-                                    options={allValues.filter((item) => item.id_variable === Number(form.request_02)).map((item) => ({ label: item.name, value: item.id }))}
-                                />
-                                <InputVariables
-                                    title={"Selecione"}
-                                    options={data}
-                                    handleChange={(e) => setForm({ ...form, request_03: e.target.value })}
-                                />
-                                <h2>=</h2>
-                                <InputVariables
-                                    title={"Selecione"}
-                                    options={allValues.filter((item) => item.id_variable === Number(form.request_03)).map((item) => ({ label: item.name, value: item.id }))}
-                                />
+                                    {/* <Button value="=" onClick={(e: any) => setForm({ ...form, operator3: '=' })}>=</Button> */}
+                                    <InputVariables
+                                        title={"Selecione"}
+                                        options={allValues.filter((item) => item.id_variable === Number(form.variable3)).map((item) => ({ label: item.name, value: item.name }))}
+                                        handleChange={(e) => setForm({ ...form, valuevariable3: e.target.value, operator3: 'nao possui condição' })}
+                                    />
+                                </>
                             </ContainerFixedInput>
                         </Containervalidate>
                         <Containervalidate>
                             <ButtonRules Bcolor="#FFFFFF" title="ENTÃO" onClick={() => { }} />
                             <ContainerFixedInput>
-                                <ContainerResult>
-                                    <h2>  Rescultado  = </h2>
-                                </ContainerResult>
+
+                                <InputVariables
+                                    title={"Selecione"}
+                                    options={newdataAnimaL}
+                                    handleChange={(e) => setForm({ ...form, variable4: e.target.value })}
+                                />
+                                <Button value="=">=</Button>
+                                <InputVariables
+                                    title={"Selecione"}
+                                    options={allValues.filter((item) => item.id_variable === Number(form.variable4)).map((item) => ({ label: item.name, value: item.name }))}
+                                    handleChange={(e) => setForm({ ...form, valuevariable4: e.target.value, operator4: '=' })}
+                                />
+
                             </ContainerFixedInput>
                         </Containervalidate>
                     </ContainerFixed>
@@ -128,7 +217,10 @@ export const ModalRegras = ({ isOpen, openModal }: InsertVariableProps) => {
                         <ButtonModal color="#255111" title="Incluir" onClick={() => { }} />
                         <ButtonModal color="#F9D34C" title="Alterar" onClick={() => { }} />
                         <ButtonModal color="#E91C1C" title="Cancelar" onClick={openModal} />
-                        <ButtonModal color="#90D74A" title="Salvar" onClick={() => { }} />
+                        <button
+                            onClick={() =>
+                                CreateRules('Regra', form)}
+                        >Salvar</button>
                     </ContainerButton>
 
                 </Container>

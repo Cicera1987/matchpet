@@ -28,7 +28,7 @@ export const Container = styled.div`
 `;
 export const ContainerFixed = styled.div`
     width: 90%;
-    height: 60%;
+    height: 70%;
     border: 2px solid #BCB8B1;
     border-radius: 10px;
     -webkit-box-shadow: inset 0px 0px 5px 0px #BCB8B1;
@@ -66,6 +66,7 @@ export const ContainerButton = styled.div`
     display: flex;
     justify-content: flex-end;
     justify-content: space-around;
+    padding-top: 1em;
     align-items: center;
     gap: 1em;
 `;
@@ -194,10 +195,12 @@ export const ContainerResult = styled.div`
 `
 
 export const ContainerButtonsValidate = styled.div`
-    width: 50px;
+    width: 2em;
+    padding:2em 0em 0em 0em;
     height: 20%;
+    gap: 1em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     color: #000000;
