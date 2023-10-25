@@ -1,4 +1,3 @@
-import Sidebar from "./components/molecules/sidebar";
 import Router from "./router/router";
 
 function App() {

@@ -3,7 +3,7 @@ export const routes = {
     regras:{
         list: '/api/rules',
         postRules: '/api/rules',
-        updateRule: '/api/rules/:id',
+        updateRule:(id:number) =>  '/api/rules/' + id,
     },
     variaveis:{
         list: '/api/variable',

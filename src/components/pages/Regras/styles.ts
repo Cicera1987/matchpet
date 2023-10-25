@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-   width: 80%;
+   width: 60%;
   height: 80%;
   background-color: #FFFFFF;
   display: flex;
@@ -12,11 +12,15 @@ export const Container = styled.div`
 `;
 
 export const ContainerRegras = styled.div`
-  width: 60.5%;
+  width: 60%;
   height: 85%;
   border: solid 3px #D9D9D9;
   border-radius: 10px;
   padding: 1rem;
+
+  :hover {
+    background-color: #D9D9D9;
+  }
 
     overflow-y: scroll;
     ::-webkit-scrollbar {

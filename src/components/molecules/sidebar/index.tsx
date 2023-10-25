@@ -14,6 +14,7 @@ const Sidebar = () => {
                 <div onClick={() => navigate("/regras")}>{<SidebarItem title="Regra" />}</div>
                 <div onClick={() => navigate("/variaveis")}>{<SidebarItem title="Variaveis" />}</div>
                 <div onClick={() => navigate("/visualizar")}>{<SidebarItem title="Visualizar" />}</div>
+                <div onClick={() => navigate("/interface")}>{<SidebarItem title="Interface" />} </div>
             </Content>
         </Container>
     );

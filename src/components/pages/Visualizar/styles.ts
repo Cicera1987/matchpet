@@ -52,6 +52,8 @@ export const ContainerVisualizar = styled.div`
   border: solid 3px #D9D9D9;
   border-radius: 10px;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 
     overflow-y: scroll;
     ::-webkit-scrollbar {
@@ -66,4 +68,16 @@ export const ContainerVisualizar = styled.div`
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+`;
+
+export const ContainerResult = styled.div`
+  width: 90%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  margin: 1em;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+  padding: 1rem;
+
 `;

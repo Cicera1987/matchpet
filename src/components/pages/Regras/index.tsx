@@ -11,7 +11,7 @@ import { Container, ContainerButton, ContainerRegras, ContainerValueRegra, Title
 export interface Payload {
     id: number;
     name: string;
-    values: {
+    Condition: {
         id: number;
         operator: string
         value: string
@@ -24,10 +24,18 @@ export interface Payload {
 const Regras = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [regras, setRegras] = useState<Payload[]>([]);
+    const [selectedRule, setSelectedRule] = useState<Payload | null>(null);
+    console.log('selectedRule: ', selectedRule);
 
     function openModal() {
         setIsOpen((prev) => !prev);
     }
+
+    function openModalUpdate(id: Payload | null) {
+        setSelectedRule(id);
+        setIsOpen(true);
+    }
+
 
     async function fetchRegras({ limit, page }: any) {
         try {
@@ -37,12 +45,13 @@ const Regras = () => {
                     page
                 }
             });
-            console.log(response.data);
             setRegras(response.data);
         } catch (error) {
             console.error(error);
         }
     }
+
+
 
     useEffect(() => {
         fetchRegras(
@@ -59,8 +68,11 @@ const Regras = () => {
                 <Header />
                 <Container>
                     <ContainerRegras>
-                        {regras.map((item: any) => (
-                            <ContainerValueRegra>
+                        {regras.map((item: Payload) => (
+                            <ContainerValueRegra
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => openModalUpdate(item)}
+                            >
                                 <TitleRegras>
                                     Regra {item.id}
                                 </TitleRegras>
@@ -72,7 +84,6 @@ const Regras = () => {
                     </ContainerRegras>
                     <ContainerButton>
                         <ReusableButton color="#90D74A" title="Criar Regra" onClick={openModal} />
-                        <ReusableButton color="#F9D34C" title="Editar Regra" onClick={() => { }} />
                     </ContainerButton>
                 </Container>
             </TemplateMatch>

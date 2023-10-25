@@ -9,7 +9,6 @@ import {
     TitleHeader,
     Containervalidate,
     ContainerFixedInput,
-    ContainerResult,
     ContainerButtonsValidate,
     Button
 } from "./styles";
@@ -39,12 +38,11 @@ interface IConditions {
 
 export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVariableProps) => {
     const [data, setData] = useState<Option[]>([])
+    const rule = regras.length > 0 ? regras[regras.length - 1].id : 1
     const [allValues, setAllValues] = useState<any[]>([])
-    const [andOperator, setAndOperator] = useState('')
-    const [orOperator, setOrOperator] = useState('')
-    const [values, setValues] = useState<string[]>([]);
-    const [operators, setOperators] = useState<string[]>([]);
-    const [lastID, setLastId] = useState<number>(regras[regras.length - 1].id)
+    const [lastID, setLastId] = useState<number>(rule)
+
+
 
     const newdata = data.filter((item) => item.label !== "Animal")
         .map((props: any) => ({ label: props.label, value: props.value }))
@@ -64,7 +62,17 @@ export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVa
         } as IConditions
     }
 
-    function constructorPayload(form: Record<string, any>){
+    function BuilderConditionUpdate(operator: string, valor: string, type: 'IF' | 'THEN', id_variable: string) {
+        return {
+            operator: operator,
+            value: valor,
+            type: type,
+            id_rule: lastID,
+            id_variable: Number(id_variable)
+        } as IConditions
+    }
+
+    function constructorPayload(form: Record<string, any>) {
         const arr = []
 
         for (var i = 1; i < 5; i++) {
@@ -81,6 +89,24 @@ export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVa
         return arr
     }
 
+    function constructorPayloadUpdate(form: Record<string, any>) {
+        const arr = []
+
+        for (var i = 1; i < 5; i++) {
+            if (i == 4) {
+                arr.push(BuilderConditionUpdate(form[`operator${i}`], form[`valuevariable${i}`], 'THEN', form[`variable${i}`]))
+                break
+            }
+            if (form.hasOwnProperty(`operator${i}`) && form.hasOwnProperty(`valuevariable${i}`) && form.hasOwnProperty(`variable${i}`)) {
+                let temp = BuilderConditionUpdate(form[`operator${i}`], form[`valuevariable${i}`], 'IF', form[`variable${i}`])
+                arr.push(temp)
+            }
+        }
+
+        return arr
+    }
+
+
     const Fetch = useCallback(async (page: number, limit: number) => {
         const { data } = await api.get(routes.variaveis.list, {
             params: {
@@ -95,18 +121,37 @@ export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVa
 
 
     async function CreateRules(name: string, form: Record<string, any>) {
-
         const Conditionals = constructorPayload(form)
 
         try {
             await api.post(routes.regras.postRules, {
-                name: name,
+                name: form.valuevariable4,
                 Condition: Conditionals
             });
             return fetchRegras({ limit: 1000, page: 1 })
         } catch (error) {
             console.error("Error:", error);
         }
+
+    }
+
+    async function handleUpdateRule(name: string, form: Record<string, any>) {
+
+        const Conditionals = constructorPayloadUpdate(form)
+        if (lastID) {
+            try {
+                const response = await api.put(routes.regras.updateRule(lastID), {
+                    idRule: lastID,
+                    name: form.valuevariable4,
+                    Condition: Conditionals
+                });
+                return fetchRegras({ limit: 1000, page: 1 })
+
+            } catch (error) {
+                console.error('Erro ao atualizar a regra:', error);
+            }
+        }
+
     }
 
 
@@ -184,7 +229,6 @@ export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVa
                                         handleChange={(e) => setForm({ ...form, variable3: e.target.value })}
                                     />
                                     <h2>=</h2>
-                                    {/* <Button value="=" onClick={(e: any) => setForm({ ...form, operator3: '=' })}>=</Button> */}
                                     <InputVariables
                                         title={"Selecione"}
                                         options={allValues.filter((item) => item.id_variable === Number(form.variable3)).map((item) => ({ label: item.name, value: item.name }))}
@@ -214,14 +258,26 @@ export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVa
                     </ContainerFixed>
 
                     <ContainerButton>
-                        <ButtonModal color="#255111" title="Incluir" onClick={() => { }} />
-                        <ButtonModal color="#F9D34C" title="Alterar" onClick={() => { }} />
-                        <ButtonModal color="#E91C1C" title="Cancelar" onClick={openModal} />
+                        <ButtonModal
+                            color="#F9D34C"
+                            title="Alterar"
+                            onClick={() => {
+                                handleUpdateRule("Regras", form)
+                                openModal()
+                            }}
+                        />
+                        <ButtonModal
+                            color="#E91C1C"
+                            title="Cancelar"
+                            onClick={openModal} />
                         <ButtonModal
                             color="#90D74A"
                             title="Salvar"
-                            onClick={() =>
-                                CreateRules('Regra', form)}
+                            onClick={() => {
+                                CreateRules('Regra', form)
+                                openModal()
+                            }
+                            }
                         />
                     </ContainerButton>
 
