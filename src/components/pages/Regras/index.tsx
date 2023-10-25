@@ -25,8 +25,7 @@ const Regras = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [regras, setRegras] = useState<Payload[]>([]);
     const [selectedRule, setSelectedRule] = useState<Payload | null>(null);
-    console.log('selectedRule: ', selectedRule);
-
+   
     function openModal() {
         setIsOpen((prev) => !prev);
     }
@@ -87,7 +86,7 @@ const Regras = () => {
                     </ContainerButton>
                 </Container>
             </TemplateMatch>
-            {isOpen && <ModalRegras {...{ isOpen, openModal, fetchRegras, regras}} />}
+            {isOpen && <ModalRegras {...{ isOpen, openModal, fetchRegras, regras, selectedRule }} />}
         </>
     )
 }

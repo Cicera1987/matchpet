@@ -25,6 +25,7 @@ interface InsertVariableProps {
     openModal: () => void;
     fetchRegras({ limit, page }: any): Promise<void>
     regras: Payload[]
+    selectedRule: Payload | null
 }
 
 interface IConditions {
@@ -36,7 +37,7 @@ interface IConditions {
     id_variable: number;
 }
 
-export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVariableProps) => {
+export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras, selectedRule }: InsertVariableProps) => {
     const [data, setData] = useState<Option[]>([])
     const rule = regras.length > 0 ? regras[regras.length - 1].id : 1
     const [allValues, setAllValues] = useState<any[]>([])
@@ -138,10 +139,10 @@ export const ModalRegras = ({ isOpen, openModal, fetchRegras, regras }: InsertVa
     async function handleUpdateRule(name: string, form: Record<string, any>) {
 
         const Conditionals = constructorPayloadUpdate(form)
-        if (lastID) {
+        if (selectedRule?.id) {
             try {
-                const response = await api.put(routes.regras.updateRule(lastID), {
-                    idRule: lastID,
+                await api.put(routes.regras.updateRule(Number(selectedRule.id)), {
+                    idRule: selectedRule.id,
                     name: form.valuevariable4,
                     Condition: Conditionals
                 });

@@ -127,6 +127,7 @@ const Variaveis = () => {
                         )}
                     </ContainerVariaveis>
                     <ContainerValor>
+                        <TitleVariaveis> Valor </TitleVariaveis>
                         {
                             values?.map((props) => (
                                 <ContainerValues>
